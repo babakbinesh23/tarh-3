@@ -1134,3 +1134,6 @@ input:focus, select:focus { border-color: var(--stripe-purple); box-shadow: 0 0 
 .text-pressure .accent .pressure-word.is-pressured{filter:brightness(1.28) saturate(1.18);text-shadow:0 0 34px rgba(165,84,255,.38),0 8px 34px rgba(0,0,0,.58)}
 @media(max-width:720px){.text-pressure .pressure-word{transition-duration:.12s}}
 @media(prefers-reduced-motion:reduce){.text-pressure .pressure-word{transform:none!important;filter:none!important}}
+
+/* Keep the original Stripe gradient visible on individually animated Persian words */
+.text-pressure .accent .pressure-word{background:linear-gradient(90deg,#635bff 0%,#c242ff 35%,#ff4fa3 68%,#ff8c5a 100%);background-size:220% 100%;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;color:transparent}
