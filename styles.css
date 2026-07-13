@@ -689,3 +689,12 @@ input.invalid, select.invalid { border-color: #dc2626; }
   .btn { width: 100%; }
   .hero-cta { flex-direction: column; }
 }
+
+/* SIDE RAYS HEADER ? supplied ReactBits config */
+.hero{isolation:isolate;background:#07111f;color:#fff}.hero::before,.hero::after{display:none!important}
+#side-rays-bg{position:absolute;z-index:0;inset:0;display:block;width:100%;height:100%;pointer-events:none;opacity:1}
+.hero-grid{position:relative;z-index:2}.hero h1{color:#fff;text-shadow:0 8px 34px rgba(0,0,0,.34)}.hero-lead{color:#d5deeb;text-shadow:0 3px 18px rgba(0,0,0,.3)}
+.hero .badge{color:#fff;background:rgba(7,17,31,.48);border-color:rgba(150,200,255,.34);box-shadow:0 12px 36px rgba(0,0,0,.22);backdrop-filter:blur(12px)}
+.hero .btn-outline{color:#fff;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.28);backdrop-filter:blur(10px)}.hero .btn-outline:hover{color:#07111f;background:#fff;border-color:#fff}
+.hero .flow-diagram{box-shadow:0 32px 90px rgba(0,0,0,.34),0 0 70px rgba(150,200,255,.14)}
+@media(max-width:900px){#side-rays-bg{opacity:.92}}@media(prefers-reduced-motion:reduce){#side-rays-bg{opacity:.82}}
