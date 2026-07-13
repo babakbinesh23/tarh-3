@@ -421,3 +421,49 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
     ripple.addEventListener('animationend', function () { ripple.remove(); });
   });
 })();
+
+
+// STRIPE-INSPIRED SYSTEM ? TARH 3 MOTION
+(function () {
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  const diagram = document.querySelector('.flow-diagram');
+  const navbar = document.querySelector('.navbar');
+
+  const updateNavbar = function () {
+    if (navbar) navbar.classList.toggle('is-scrolled', window.scrollY > 18);
+  };
+  updateNavbar();
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('stripe-active');
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.section-animated').forEach(function (section) { observer.observe(section); });
+  }
+
+  if (!reduce && hero && diagram && window.matchMedia('(pointer:fine)').matches) {
+    let frame = 0;
+    hero.addEventListener('pointermove', function (event) {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(function () {
+        const rect = hero.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+        const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+        hero.style.setProperty('--pointer-x', (x * 100).toFixed(1) + '%');
+        hero.style.setProperty('--pointer-y', (y * 100).toFixed(1) + '%');
+        diagram.style.setProperty('--tilt-x', ((.5 - x) * 7).toFixed(2) + 'deg');
+        diagram.style.setProperty('--tilt-y', ((y - .5) * 6).toFixed(2) + 'deg');
+      });
+    });
+    hero.addEventListener('pointerleave', function () {
+      hero.style.setProperty('--pointer-x', '50%');
+      hero.style.setProperty('--pointer-y', '40%');
+      diagram.style.setProperty('--tilt-x', '3deg');
+      diagram.style.setProperty('--tilt-y', '-2deg');
+    });
+  }
+})();
