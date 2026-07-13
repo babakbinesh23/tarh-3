@@ -500,3 +500,15 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
   }
   addEventListener('resize',()=>{reset();if(reduced)draw(0)});reset();reduced?draw(0):requestAnimationFrame(draw);
 })();
+
+// TEXT PRESSURE ? TARH 3 (word-aware for connected Persian script)
+(function(){
+  const title=document.querySelector('[data-text-pressure]');if(!title)return;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function wrap(node){Array.from(node.childNodes).forEach(function(child){if(child.nodeType===3){const parts=child.textContent.split(/(\s+)/),frag=document.createDocumentFragment();parts.forEach(function(part){if(!part)return;if(/\s+/.test(part)){frag.appendChild(document.createTextNode(part));return}const span=document.createElement('span');span.className='pressure-word';span.textContent=part;frag.appendChild(span)});child.replaceWith(frag)}else if(child.nodeType===1&&!child.classList.contains('pressure-word'))wrap(child)})}
+  wrap(title);const words=Array.from(title.querySelectorAll('.pressure-word'));if(!words.length||reduced)return;
+  let px=0,py=0,raf=0,inside=false;
+  function render(){raf=0;const radius=Math.max(150,Math.min(innerWidth*.3,330));words.forEach(function(word){const r=word.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,d=Math.hypot(px-cx,(py-cy)*1.3),p=inside?Math.max(0,1-d/radius):0,e=p*p*(3-2*p),sx=1+e*.22,sy=1+e*.10,lift=-e*4,skew=((px-cx)/radius)*e*-4;word.style.transform='translateY('+lift.toFixed(2)+'px) scaleX('+sx.toFixed(3)+') scaleY('+sy.toFixed(3)+') skewX('+skew.toFixed(2)+'deg)';word.style.setProperty('--pw',Math.round(700+e*200));word.classList.toggle('is-pressured',e>.18)})}
+  function queue(){if(!raf)raf=requestAnimationFrame(render)}
+  title.addEventListener('pointermove',function(e){inside=true;px=e.clientX;py=e.clientY;queue()});title.addEventListener('pointerleave',function(){inside=false;queue()});title.addEventListener('pointerenter',function(e){inside=true;px=e.clientX;py=e.clientY;queue()});addEventListener('resize',queue,{passive:true});
+})();
