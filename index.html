@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>برقتو | فروش برق نیروگاه خورشیدی بالاتر از خرید تضمینی</title>
+  <meta name="description" content="برقتو تجمیع‌کننده برق نیروگاه‌های خورشیدی؛ فروش برق نیروگاه شما با درآمد بالاتر از خرید تضمینی دولت.">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=glass-green-1">
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ناوبار -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand">
+        <span class="brand-mark">⚡</span>
+        <span class="brand-name">برقتو</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#calculator">ماشین‌حساب درآمد</a>
+        <a href="#compare">چرا برقتو؟</a>
+        <a href="#faq">سوالات متداول</a>
+      </nav>
+      <a href="#lead-form" class="btn btn-primary btn-sm">بررسی رایگان</a>
+    </div>
+  </header>
+
+  <!-- سکشن ۱ — هیرو -->
+  <section id="hero" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content reveal reveal-right">
+        <span class="badge">تجمیع‌کننده برق نیروگاه‌های خورشیدی</span>
+        <h1>برق نیروگاه خورشیدی خود را <span class="accent">بالاتر از قیمت خرید تضمینی دولت</span> بفروشید</h1>
+        <p class="hero-lead">
+          برقتو به‌عنوان تجمیع‌کننده برق، با مدیریت تخصصی فروش برق نیروگاه‌های خورشیدی،
+          امکان فروش برق با درآمد بالاتر از خرید تضمینی را فراهم می‌کند.
+        </p>
+        <div class="hero-cta">
+          <a href="#calculator" class="btn btn-primary">محاسبه درآمد نیروگاه</a>
+          <a href="#lead-form" class="btn btn-outline">بررسی رایگان شرایط همکاری</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal reveal-left" aria-hidden="true">
+        <div class="flow-diagram">
+          <svg class="flow-svg" viewBox="0 0 340 400" role="img"
+               aria-label="نمای تجمیع‌کنندگی: چند نیروگاه خورشیدی به شبکه برقتو و سپس فروش به بازار با قیمت بالاتر">
+            <defs>
+              <linearGradient id="gSun" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffc107"/>
+                <stop offset="1" stop-color="#ff8a00"/>
+              </linearGradient>
+              <linearGradient id="gHub" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1b1763"/>
+                <stop offset="1" stop-color="#2d2a7a"/>
+              </linearGradient>
+              <linearGradient id="gMarket" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3aa564"/>
+                <stop offset="1" stop-color="#80ce97"/>
+              </linearGradient>
+            </defs>
+
+            <!-- خطوط اتصال نیروگاه‌ها به هاب -->
+            <g class="flow-links" fill="none" stroke="#ff9133" stroke-width="2.5"
+               stroke-linecap="round" stroke-dasharray="6 7">
+              <path id="energy-path-1" d="M60 92 C60 135, 170 135, 170 176"/>
+              <path id="energy-path-2" d="M170 92 L170 176"/>
+              <path id="energy-path-3" d="M280 92 C280 135, 170 135, 170 176"/>
+            </g>
+            <!-- خط هاب به بازار -->
+            <path id="energy-path-4" class="flow-link-main" d="M170 232 L170 292" fill="none"
+                  stroke="#3aa564" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 7"/>
+
+            <!-- ذرات انرژی روی مسیرها -->
+            <g class="energy-particles" aria-hidden="true">
+              <circle r="3" fill="#ff9133"><animateMotion dur="2.6s" repeatCount="indefinite" begin="0s"><mpath href="#energy-path-1"/></animateMotion></circle>
+              <circle r="2.6" fill="#ffb877"><animateMotion dur="2.3s" repeatCount="indefinite" begin=".35s"><mpath href="#energy-path-2"/></animateMotion></circle>
+              <circle r="3" fill="#ff9133"><animateMotion dur="2.8s" repeatCount="indefinite" begin=".7s"><mpath href="#energy-path-3"/></animateMotion></circle>
+              <circle r="3.2" fill="#80ce97"><animateMotion dur="2.1s" repeatCount="indefinite" begin=".2s"><mpath href="#energy-path-4"/></animateMotion></circle>
+            </g>
+
+            <!-- سه نیروگاه خورشیدی -->
+            <g class="solar-plant">
+              <g transform="translate(30 40)"><use href="#panel"/></g>
+              <g transform="translate(140 40)"><use href="#panel"/></g>
+              <g transform="translate(250 40)"><use href="#panel"/></g>
+            </g>
+
+            <!-- تعریف یک پنل خورشیدی قابل‌استفاده -->
+            <defs>
+              <g id="panel">
+                <circle class="panel-sun" cx="30" cy="14" r="11" fill="url(#gSun)"/>
+                <g class="sun-rays" stroke="#ffb300" stroke-width="2" stroke-linecap="round">
+                  <line x1="30" y1="-2" x2="30" y2="4"/>
+                  <line x1="30" y1="24" x2="30" y2="30"/>
+                  <line x1="14" y1="14" x2="20" y2="14"/>
+                  <line x1="40" y1="14" x2="46" y2="14"/>
+                  <line x1="19" y1="3" x2="23" y2="7"/>
+                  <line x1="37" y1="21" x2="41" y2="25"/>
+                  <line x1="41" y1="3" x2="37" y2="7"/>
+                  <line x1="23" y1="21" x2="19" y2="25"/>
+                </g>
+                <rect x="8" y="34" width="44" height="24" rx="3" fill="#1c2331"/>
+                <g stroke="#5b6472" stroke-width="1" opacity=".6">
+                  <line x1="22" y1="34" x2="22" y2="58"/>
+                  <line x1="37" y1="34" x2="37" y2="58"/>
+                  <line x1="8" y1="46" x2="52" y2="46"/>
+                </g>
+                <rect x="27" y="58" width="6" height="8" fill="#5b6472"/>
+              </g>
+            </defs>
+
+            <!-- هاب شبکه برقتو -->
+            <g class="flow-node-hub">
+              <rect x="70" y="176" width="200" height="56" rx="16" fill="url(#gHub)"/>
+              <circle cx="102" cy="204" r="15" fill="#fff" opacity=".95"/>
+              <path d="M104 195 L96 206 L102 206 L100 213 L108 202 L102 202 Z" fill="#ff9133"/>
+              <text x="170" y="210" text-anchor="middle" class="flow-t-light">شبکه برقتو</text>
+            </g>
+
+            <!-- بازار با قیمت بالاتر -->
+            <g class="flow-node-market">
+              <rect x="40" y="292" width="260" height="72" rx="16" fill="url(#gMarket)"/>
+              <!-- نمودار میله‌ای صعودی -->
+              <g fill="#fff" opacity=".95">
+                <rect x="70" y="336" width="9" height="14" rx="2"/>
+                <rect x="84" y="328" width="9" height="22" rx="2"/>
+                <rect x="98" y="318" width="9" height="32" rx="2"/>
+              </g>
+              <path d="M66 340 L90 324 L108 312" fill="none" stroke="#fff" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M108 312 l-8 1 l3 -7 Z" fill="#fff"/>
+              <text x="200" y="326" text-anchor="middle" class="flow-t-light">فروش به بازار</text>
+              <text x="200" y="348" text-anchor="middle" class="flow-t-light flow-t-sm">با قیمت بالاتر</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- سکشن ۱.۵ — آیین‌نامه جدید -->
+  <section class="section section-note section-animated">
+    <div class="container note-card reveal reveal-zoom">
+      <h2>آیین‌نامه جدید، فرصت جدید برای نیروگاه‌های کوچک و متوسط</h2>
+      <p>اکنون همه نیروگاه‌های خورشیدی می‌توانند از ظرفیت‌های جدید بازار برق برای فروش انرژی خود استفاده کنند.</p>
+      <ul class="note-list reveal reveal-stagger">
+        <li>امکان فروش از طریق تجمیع‌کننده</li>
+        <li>درآمد بالاتر نسبت به خرید تضمینی در بسیاری از شرایط بازار</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- سکشن ۲ — ماشین‌حساب -->
+  <section id="calculator" class="section section-animated">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>اگر برق نیروگاه خود را به برقتو بفروشید</h2>
+        <p>در چند ثانیه محاسبه کنید فروش برق به برقتو چه میزان درآمد بیشتری نسبت به خرید تضمینی دولت برای نیروگاه شما ایجاد می‌کند.</p>
+      </div>
+
+      <div class="calc-card reveal reveal-zoom">
+        <form id="calc-form" class="calc-inputs" novalidate>
+          <div class="field">
+            <label for="capacity">ظرفیت نیروگاه</label>
+            <div class="input-group">
+              <input type="number" id="capacity" min="0" step="any" placeholder="مثلاً ۱۰۰" inputmode="decimal">
+              <select id="capacity-unit" aria-label="واحد ظرفیت">
+                <option value="kw">کیلووات</option>
+                <option value="mw">مگاوات</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="plant-type">نوع نیروگاه</label>
+            <select id="plant-type">
+              <option value="ongrid">آنگرید</option>
+              <option value="hybrid">هیبرید</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">محاسبه درآمد</button>
+        </form>
+
+        <div class="calc-results reveal reveal-stagger" id="calc-results" aria-live="polite">
+          <div class="result-row">
+            <span class="result-label">تولید سالانه (کیلووات‌ساعت)</span>
+            <span class="result-value" id="r-production">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">درآمد با خرید تضمینی دولت</span>
+            <span class="result-value" id="r-guaranteed">—</span>
+          </div>
+          <div class="result-row highlight">
+            <span class="result-label">درآمد با برقتو</span>
+            <span class="result-value" id="r-barghto">—</span>
+          </div>
+          <div class="result-row diff">
+            <span class="result-label">اختلاف درآمد سالانه</span>
+            <span class="result-value" id="r-diff">—</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        برقتو افزایش درآمد را بر اساس عملکرد واقعی فروش برق در بازار و داده‌های معاملاتی نیروگاه‌های فعال محاسبه می‌کند.
+        این محاسبه کاملاً تخمینی است و بر اساس شرایط واقعی بازار انرژی به‌روزرسانی می‌شود.
+      </p>
+    </div>
+  </section>
+
+  <!-- سکشن ۳ — فرم بررسی رایگان -->
+  <section id="lead-form" class="section section-alt section-animated">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>بررسی رایگان نیروگاه شما</h2>
+        <p>کارشناسان برقتو شرایط نیروگاه شما را بررسی می‌کنند و بهترین مدل همکاری را متناسب با ظرفیت، موقعیت جغرافیایی و نوع قرارداد فعلی پیشنهاد می‌دهند.</p>
+      </div>
+
+      <form id="lead" class="lead-card reveal reveal-stagger" novalidate>
+        <div class="field">
+          <label for="l-name">نام</label>
+          <input type="text" id="l-name" placeholder="نام و نام خانوادگی">
+          <span class="error" data-for="l-name"></span>
+        </div>
+        <div class="field">
+          <label for="l-mobile">شماره موبایل</label>
+          <input type="tel" id="l-mobile" placeholder="۰۹xxxxxxxxx" inputmode="numeric">
+          <span class="error" data-for="l-mobile"></span>
+        </div>
+        <div class="field">
+          <label for="l-capacity">ظرفیت نیروگاه (کیلووات)</label>
+          <input type="number" id="l-capacity" min="0" step="any" placeholder="مثلاً ۱۰۰" inputmode="decimal">
+          <span class="error" data-for="l-capacity"></span>
+        </div>
+        <div class="field">
+          <label for="l-province">استان</label>
+          <select id="l-province">
+            <option value="">انتخاب کنید</option>
+            <option>آذربایجان شرقی</option>
+            <option>آذربایجان غربی</option>
+            <option>اردبیل</option>
+            <option>اصفهان</option>
+            <option>البرز</option>
+            <option>ایلام</option>
+            <option>بوشهر</option>
+            <option>تهران</option>
+            <option>چهارمحال و بختیاری</option>
+            <option>خراسان جنوبی</option>
+            <option>خراسان رضوی</option>
+            <option>خراسان شمالی</option>
+            <option>خوزستان</option>
+            <option>زنجان</option>
+            <option>سمنان</option>
+            <option>سیستان و بلوچستان</option>
+            <option>فارس</option>
+            <option>قزوین</option>
+            <option>قم</option>
+            <option>کردستان</option>
+            <option>کرمان</option>
+            <option>کرمانشاه</option>
+            <option>کهگیلویه و بویراحمد</option>
+            <option>گلستان</option>
+            <option>گیلان</option>
+            <option>لرستان</option>
+            <option>مازندران</option>
+            <option>مرکزی</option>
+            <option>هرمزگان</option>
+            <option>همدان</option>
+            <option>یزد</option>
+          </select>
+          <span class="error" data-for="l-province"></span>
+        </div>
+        <div class="field">
+          <label for="l-status">وضعیت نیروگاه</label>
+          <select id="l-status">
+            <option value="">انتخاب کنید</option>
+            <option>در حال بهره‌برداری</option>
+            <option>در حال ساخت</option>
+            <option>در مرحله طراحی / مجوز</option>
+          </select>
+          <span class="error" data-for="l-status"></span>
+        </div>
+
+        <div class="field field-full">
+          <button type="submit" class="btn btn-primary btn-block">درخواست بررسی رایگان</button>
+          <p class="form-note">پس از ثبت درخواست، کارشناسان ما در کوتاه‌ترین زمان با شما تماس می‌گیرند.</p>
+        </div>
+
+        <div class="form-success" id="lead-success" hidden>
+          ✅ درخواست شما با موفقیت ثبت شد. به‌زودی با شما تماس می‌گیریم.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- سکشن ۴ — جدول مقایسه -->
+  <section id="compare" class="section section-animated">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>چرا برقتو؟</h2>
+        <p>مقایسه فروش برق از طریق خرید تضمینی دولت و همکاری با برقتو</p>
+      </div>
+
+      <div class="table-wrap reveal reveal-zoom">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>ویژگی</th>
+              <th>خرید تضمینی دولت</th>
+              <th class="col-highlight">فروش با برقتو</th>
+            </tr>
+          </thead>
+          <tbody class="reveal reveal-stagger">
+            <tr>
+              <td>قیمت فروش برق</td>
+              <td>نرخ ثابت و تعیین‌شده</td>
+              <td class="col-highlight">مبتنی بر بازار، معمولاً بالاتر</td>
+            </tr>
+            <tr>
+              <td>دسترسی نیروگاه‌های کوچک به بازار</td>
+              <td>محدود</td>
+              <td class="col-highlight">امکان‌پذیر از طریق تجمیع‌کنندگی</td>
+            </tr>
+            <tr>
+              <td>مدیریت فروش و معاملات</td>
+              <td>بر عهده مالک</td>
+              <td class="col-highlight">به‌صورت تخصصی توسط برقتو</td>
+            </tr>
+            <tr>
+              <td>نیاز به عضویت در بورس انرژی</td>
+              <td>—</td>
+              <td class="col-highlight">در بسیاری از مدل‌ها لازم نیست</td>
+            </tr>
+            <tr>
+              <td>شفافیت گزارش فروش و تسویه</td>
+              <td>محدود</td>
+              <td class="col-highlight">گزارش شفاف و دوره‌ای</td>
+            </tr>
+            <tr>
+              <td>نیاز به تجهیزات جدید</td>
+              <td>—</td>
+              <td class="col-highlight">معمولاً بدون نیاز به تغییر فنی</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- سکشن ۵ — ویدیو -->
+  <section class="section section-alt section-animated">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>چطور تنها در ۵ دقیقه درآمد نیروگاه را چند برابر افزایش دهید</h2>
+        <p>در این ویدیو می‌بینید: آیین‌نامه جدید چیست، چه کسانی مشمول هستند، چقدر درآمد بیشتر می‌شود و مراحل همکاری چگونه است.</p>
+      </div>
+      <div class="video-placeholder reveal reveal-zoom" role="button" tabindex="0" aria-label="پخش ویدیو">
+        <div class="play-btn">▶</div>
+        <span>ویدیو معرفی برقتو</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- سکشن ۶ — کارت‌های آمار -->
+  <section class="section section-animated">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>عملکرد برقتو</h2>
+      </div>
+      <div class="stats-grid reveal reveal-stagger">
+        <div class="stat-card reveal-right">
+          <div class="stat-number" data-target="120" data-suffix="+">۰</div>
+          <div class="stat-title">چند نیروگاه؟</div>
+          <div class="stat-desc">عدد به‌روز از نیروگاه‌های تحت مدیریت</div>
+        </div>
+        <div class="stat-card reveal-zoom">
+          <div class="stat-number" data-target="85" data-suffix=" MW">۰</div>
+          <div class="stat-title">چند مگاوات؟</div>
+          <div class="stat-desc">مجموع ظرفیت برق مدیریت‌شده</div>
+        </div>
+        <div class="stat-card reveal-left">
+          <div class="stat-number" data-target="1500" data-suffix="+">۰</div>
+          <div class="stat-title">چند معامله؟</div>
+          <div class="stat-desc">تعداد معاملات انجام‌شده در بازار برق</div>
+        </div>
+        <div class="stat-card reveal-zoom">
+          <div class="stat-number" data-target="35" data-suffix="٪">۰</div>
+          <div class="stat-title">چند درصد افزایش درآمد؟</div>
+          <div class="stat-desc">میانگین افزایش درآمد نسبت به خرید تضمینی</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- سکشن ۷ — سوالات متداول -->
+  <section id="faq" class="section section-alt section-animated">
+    <div class="container container-narrow">
+      <div class="section-head reveal">
+        <h2>سوالات متداول</h2>
+      </div>
+
+      <div class="faq-list reveal reveal-stagger">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            آیا نیروگاه من شرایط همکاری با برقتو را دارد؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>تمامی نیروگاه‌های تجدیدپذیر متصل به شبکه توزیع می‌توانند شرایط همکاری با برقتو را بررسی کنند. پس از ثبت درخواست، وضعیت فنی و قراردادی نیروگاه توسط کارشناسان ما ارزیابی می‌شود.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            حداقل ظرفیت نیروگاه برای همکاری چقدر است؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>برقتو امکان بررسی نیروگاه‌های خورشیدی از ۵ کیلووات تا ۱ مگاوات را فراهم کرده است. شرایط همکاری بر اساس ظرفیت و وضعیت نیروگاه بررسی می‌شود.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            آیا نیروگاه‌های خانگی هم می‌توانند برق خود را از طریق برقتو بفروشند؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>بله. یکی از اهداف مدل تجمیع‌کنندگی، ایجاد امکان دسترسی نیروگاه‌های کوچک و خانگی به بازار برق است؛ موضوعی که پیش از این برای بسیاری از این نیروگاه‌ها امکان‌پذیر نبود.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            آیا برای همکاری با برقتو باید عضو بورس انرژی باشم؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>خیر. فرآیندهای مربوط به عرضه برق در بازار توسط برقتو مدیریت می‌شود و در بسیاری از مدل‌های همکاری، نیازی به عضویت مستقیم مالک نیروگاه در بورس انرژی وجود ندارد.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            آیا برای همکاری با برقتو به تجهیزات جدید نیاز دارم؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>خیر. در صورتی که نیروگاه شما تکمیل شده و در حال تولید برق باشد، معمولاً نیازی به نصب تجهیزات جدید یا ایجاد تغییرات فنی وجود نخواهد داشت.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            اگر نیروگاه من هنوز در حال ساخت باشد چه می‌شود؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>درخواست شما قابل ثبت است، اما شروع همکاری پس از تکمیل نیروگاه و آماده بودن آن برای تزریق برق به شبکه انجام خواهد شد.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            تسویه درآمد نیروگاه چگونه انجام می‌شود؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>تسویه‌ها مطابق مفاد قرارداد همکاری و در دوره‌های مشخص انجام می‌شود. اطلاعات مربوط به فروش برق و تسویه‌ها نیز به‌صورت شفاف در اختیار نیروگاه قرار خواهد گرفت.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            همکاری با برقتو چگونه آغاز می‌شود؟
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><p>پس از ثبت درخواست، کارشناسان برقتو اطلاعات نیروگاه را بررسی می‌کنند. در صورت احراز شرایط، مدل همکاری پیشنهاد شده و پس از عقد قرارداد، فرآیند فروش برق نیروگاه از طریق برقتو آغاز می‌شود.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-cta">
+        <a href="#lead-form" class="btn btn-primary">بررسی رایگان شرایط همکاری</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="brand"><span class="brand-mark">⚡</span> برقتو</span>
+      <p>تجمیع‌کننده برق نیروگاه‌های خورشیدی — فروش برق بالاتر از خرید تضمینی دولت</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
