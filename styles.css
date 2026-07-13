@@ -1139,3 +1139,6 @@ input:focus, select:focus { border-color: var(--stripe-purple); box-shadow: 0 0 
 .scroll-stack-card:hover{transform:scale(var(--stack-scale,1));box-shadow:0 38px 96px rgba(10,37,64,.32),0 4px 16px rgba(0,0,0,.15)}
 @media(max-width:720px){.stats-grid.scroll-stack{padding-bottom:24vh}.scroll-stack-card{top:calc(84px + var(--stack-index)*11px);min-height:215px;margin-bottom:24vh;padding:38px 28px;border-radius:22px}.scroll-stack-card:nth-child(4){margin-bottom:4vh}}
 @media(prefers-reduced-motion:reduce){.scroll-stack-card{transform:none!important;transition:none}}
+
+/* Sticky cards must not be clipped by the original section overflow */
+.section:has([data-scroll-stack]){overflow:visible}
