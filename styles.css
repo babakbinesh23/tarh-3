@@ -1127,13 +1127,15 @@ input:focus, select:focus { border-color: var(--stripe-purple); box-shadow: 0 0 
 .hero .badge{color:#eafff7;background:rgba(4,20,16,.68);border-color:rgba(67,232,174,.34);box-shadow:0 12px 34px rgba(0,0,0,.34)}.hero .btn-outline{color:#fff;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.28);backdrop-filter:blur(12px)}.hero .btn-outline:hover{color:#fff;background:rgba(65,214,158,.16);border-color:rgba(92,238,184,.62)}.hero .flow-diagram{border-color:rgba(100,232,185,.38);box-shadow:0 34px 90px rgba(0,0,0,.48),0 0 70px rgba(19,184,128,.14)}
 @media(max-width:900px){.hero::after{height:120px}#letter-glitch-bg{opacity:.82}}@media(prefers-reduced-motion:reduce){#letter-glitch-bg{opacity:.68}}
 
-/* TEXT PRESSURE ? PERSIAN WORD-AWARE */
-.text-pressure{--pressure-x:50%;position:relative;isolation:isolate;cursor:default}
-.text-pressure .pressure-word{display:inline-block;position:relative;transform-origin:50% 70%;will-change:transform,filter;font-variation-settings:"wght" var(--pw,700);transition:transform .16s cubic-bezier(.2,.8,.2,1),filter .18s ease,color .18s ease;text-shadow:0 8px 34px rgba(0,0,0,.54)}
-.text-pressure .pressure-word.is-pressured{filter:brightness(1.16);text-shadow:0 0 28px rgba(121,238,196,.28),0 8px 34px rgba(0,0,0,.58)}
-.text-pressure .accent .pressure-word.is-pressured{filter:brightness(1.28) saturate(1.18);text-shadow:0 0 34px rgba(165,84,255,.38),0 8px 34px rgba(0,0,0,.58)}
-@media(max-width:720px){.text-pressure .pressure-word{transition-duration:.12s}}
-@media(prefers-reduced-motion:reduce){.text-pressure .pressure-word{transform:none!important;filter:none!important}}
-
-/* Keep the original Stripe gradient visible on individually animated Persian words */
-.text-pressure .accent .pressure-word{background:linear-gradient(90deg,#635bff 0%,#c242ff 35%,#ff4fa3 68%,#ff8c5a 100%);background-size:220% 100%;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;color:transparent}
+/* SCROLL STACK ? TARH 3 */
+.stats-grid.scroll-stack{display:flex;flex-direction:column;gap:0;max-width:920px;margin:0 auto;padding:18px 0 34vh;isolation:isolate}
+.scroll-stack-card{--stack-index:0;position:sticky;top:calc(104px + var(--stack-index)*16px);z-index:calc(10 + var(--stack-index));display:grid;align-content:center;min-height:245px;margin-bottom:30vh;padding:48px 54px;border:1px solid rgba(255,255,255,.16);border-radius:28px;color:#fff;background:linear-gradient(135deg,#0a2540,#173a5e);box-shadow:0 32px 80px rgba(10,37,64,.26),0 4px 16px rgba(0,0,0,.12);transform:scale(var(--stack-scale,1));transform-origin:top center;transition:transform .12s linear,filter .18s ease}
+.scroll-stack-card:nth-child(2){background:linear-gradient(135deg,#4038a8,#635bff)}
+.scroll-stack-card:nth-child(3){background:linear-gradient(135deg,#075f61,#00a88a)}
+.scroll-stack-card:nth-child(4){background:linear-gradient(135deg,#8b2f70,#d34f8b);margin-bottom:8vh}
+.scroll-stack-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 18% 8%,rgba(255,255,255,.22),transparent 34%);pointer-events:none}
+.scroll-stack-card .stat-number{position:relative;color:#fff;font-size:clamp(3rem,7vw,5.8rem);line-height:1;text-shadow:0 8px 28px rgba(0,0,0,.18)}
+.scroll-stack-card .stat-title{position:relative;margin-top:18px;color:#fff;font-size:1.35rem}.scroll-stack-card .stat-desc{position:relative;color:rgba(255,255,255,.76);font-size:1rem}
+.scroll-stack-card:hover{transform:scale(var(--stack-scale,1));box-shadow:0 38px 96px rgba(10,37,64,.32),0 4px 16px rgba(0,0,0,.15)}
+@media(max-width:720px){.stats-grid.scroll-stack{padding-bottom:24vh}.scroll-stack-card{top:calc(84px + var(--stack-index)*11px);min-height:215px;margin-bottom:24vh;padding:38px 28px;border-radius:22px}.scroll-stack-card:nth-child(4){margin-bottom:4vh}}
+@media(prefers-reduced-motion:reduce){.scroll-stack-card{transform:none!important;transition:none}}
