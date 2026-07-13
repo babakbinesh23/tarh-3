@@ -1119,3 +1119,10 @@ input:focus, select:focus { border-color: var(--stripe-purple); box-shadow: 0 0 
   .hero::before, .flow-diagram, .note-card::after, .video-placeholder::before, .hero h1 .accent { animation: none !important; }
   .btn::before { display: none; }
 }
+
+
+/* GRID SCAN HERO ? TARH 3 */
+.hero{background:#070914;color:#fff}.hero::before{display:none}.hero::after{z-index:-1;inset:auto 0 -1px;width:100%;height:170px;transform:none;background:linear-gradient(to bottom,transparent,rgba(7,9,20,.45) 25%,#fff);box-shadow:none}
+#grid-scan-bg{position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;pointer-events:none;opacity:.96}.hero-grid{z-index:2}.hero h1{color:#fff;text-shadow:0 8px 34px rgba(0,0,0,.38)}.hero-lead{color:#bdcbe0}
+.hero .badge{color:#eef3ff;background:rgba(17,24,49,.62);border-color:rgba(174,132,255,.34);box-shadow:0 12px 34px rgba(0,0,0,.28)}.hero .btn-outline{color:#fff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);backdrop-filter:blur(12px)}.hero .btn-outline:hover{color:#fff;background:rgba(255,255,255,.15);border-color:rgba(196,168,255,.6)}.hero .flow-diagram{border-color:rgba(205,174,255,.44);box-shadow:0 34px 90px rgba(0,0,0,.4),0 0 70px rgba(162,82,255,.2)}
+@media(max-width:900px){.hero::after{height:120px}#grid-scan-bg{opacity:.84}}@media(prefers-reduced-motion:reduce){#grid-scan-bg{opacity:.72}}
