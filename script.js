@@ -236,11 +236,14 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
 (function () {
   const reduceMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const enhancedMotion = !reduceMotion && window.gsap && window.ScrollTrigger;
 
   const revealEls = document.querySelectorAll('.reveal');
 
   // ۱) ظاهرشدن نرم عناصر هنگام ورود به دید
-  if (reduceMotion) {
+  if (enhancedMotion) {
+    // GSAP initializes these elements after the solar text has been prepared.
+  } else if (reduceMotion) {
     revealEls.forEach(el => el.classList.add('in-view'));
   } else if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(function (entries, obs) {
@@ -277,14 +280,275 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
     ticking = false;
   }
 
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
+  if (!enhancedMotion) {
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
 
-  onScroll();
+    onScroll();
+  }
+})();
+
+// SOLAR MOTION SYSTEM — lightweight, dependency-free interaction layer
+(function () {
+  const reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Floating photons in the hero.
+  const particleField = document.getElementById('solar-particles');
+  if (particleField && !reduceMotion) {
+    const colors = ['#ffb21c', '#c8ff72', '#57e49b', '#63d8ff'];
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < 38; i += 1) {
+      const particle = document.createElement('i');
+      particle.className = 'solar-particle';
+      particle.style.setProperty('--x', (Math.random() * 96).toFixed(2) + '%');
+      particle.style.setProperty('--y', (18 + Math.random() * 78).toFixed(2) + '%');
+      particle.style.setProperty('--s', (1.5 + Math.random() * 3.5).toFixed(2) + 'px');
+      particle.style.setProperty('--d', (5 + Math.random() * 7).toFixed(2) + 's');
+      particle.style.setProperty('--delay', (-Math.random() * 10).toFixed(2) + 's');
+      particle.style.setProperty('--dx', (-60 + Math.random() * 120).toFixed(0) + 'px');
+      particle.style.setProperty('--c', colors[i % colors.length]);
+      fragment.appendChild(particle);
+    }
+    particleField.appendChild(fragment);
+  }
+
+  // Floating live-energy labels around the solar network diagram.
+  const heroVisual = document.querySelector('.hero-visual');
+  const flowDiagram = heroVisual && heroVisual.querySelector('.flow-diagram');
+  if (flowDiagram && !flowDiagram.querySelector('.energy-chip')) {
+    const chipRow = document.createElement('div');
+    chipRow.className = 'energy-chip-row';
+    const chipOne = document.createElement('div');
+    chipOne.className = 'energy-chip energy-chip--one';
+    chipOne.innerHTML = '<span>☀</span><span><b>زنده</b> تولید خورشیدی</span>';
+    const chipTwo = document.createElement('div');
+    chipTwo.className = 'energy-chip energy-chip--two';
+    chipTwo.innerHTML = '<span>↗</span><span><b>۳۵٪+</b> بازده فروش</span>';
+    chipRow.append(chipOne, chipTwo);
+    flowDiagram.insertBefore(chipRow, flowDiagram.firstChild);
+  }
+
+  // Word-by-word blur reveal while preserving nested accent styling.
+  function splitWords(element) {
+    if (!element || element.dataset.solarSplit === 'true') return;
+    element.dataset.solarSplit = 'true';
+    element.setAttribute('aria-label', element.textContent.trim());
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue.trim()) textNodes.push(walker.currentNode);
+    }
+    let wordIndex = 0;
+    textNodes.forEach(function (textNode) {
+      const words = textNode.nodeValue.trim().split(/\s+/);
+      const part = document.createDocumentFragment();
+      words.forEach(function (word) {
+        const span = document.createElement('span');
+        span.className = 'solar-word';
+        span.textContent = word;
+        span.setAttribute('aria-hidden', 'true');
+        span.style.setProperty('--word-index', wordIndex);
+        wordIndex += 1;
+        part.appendChild(span);
+      });
+      textNode.parentNode.replaceChild(part, textNode);
+    });
+  }
+
+  const heroTitle = document.querySelector('.hero h1');
+  splitWords(heroTitle);
+  const kineticTitles = document.querySelectorAll('.section-head h2, .note-card h2');
+  kineticTitles.forEach(splitWords);
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    kineticTitles.forEach(function (title) { title.classList.add('solar-text-ready'); });
+  } else {
+    const titleObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('solar-text-ready');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .35, rootMargin: '0px 0px -8% 0px' });
+    kineticTitles.forEach(function (title) { titleObserver.observe(title); });
+  }
+
+  // Cursor sunlight and dark-glass navigation state.
+  const hero = document.querySelector('.hero');
+  const navbar = document.querySelector('.navbar');
+  let pointerFrame = 0;
+  if (hero && !reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    hero.addEventListener('pointermove', function (event) {
+      if (pointerFrame) cancelAnimationFrame(pointerFrame);
+      pointerFrame = requestAnimationFrame(function () {
+        const rect = hero.getBoundingClientRect();
+        hero.style.setProperty('--hero-x', (((event.clientX - rect.left) / rect.width) * 100).toFixed(1) + '%');
+        hero.style.setProperty('--hero-y', (((event.clientY - rect.top) / rect.height) * 100).toFixed(1) + '%');
+      });
+    });
+  }
+  function updateNav() {
+    if (navbar) navbar.classList.toggle('is-scrolled', window.scrollY > 20);
+  }
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  if (!reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    // Spotlight follows the pointer across interactive surfaces.
+    document.querySelectorAll('.note-card, .calc-card, .lead-card, .stat-card, .faq-item').forEach(function (card) {
+      card.addEventListener('pointermove', function (event) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', (event.clientX - rect.left) + 'px');
+        card.style.setProperty('--mouse-y', (event.clientY - rect.top) + 'px');
+      });
+    });
+
+    // ReactBits-style subtle depth without a runtime dependency.
+    document.querySelectorAll('.flow-diagram, .stat-card, .note-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (event) {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        card.style.transform = 'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg) translateY(-5px)';
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    });
+
+    // Magnetic CTA movement kept intentionally small for usability.
+    document.querySelectorAll('.btn').forEach(function (button) {
+      button.addEventListener('pointermove', function (event) {
+        const rect = button.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        button.style.transform = 'translate(' + (x * .08).toFixed(1) + 'px,' + (y * .12).toFixed(1) + 'px)';
+      });
+      button.addEventListener('pointerleave', function () { button.style.transform = ''; });
+    });
+  }
+})();
+
+// NATURAL MOTION ENGINE — GSAP + ScrollTrigger + Lenis
+(function () {
+  const reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !window.gsap || !window.ScrollTrigger) return;
+
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+  gsap.registerPlugin(ScrollTrigger);
+  document.body.classList.add('motion-powered');
+
+  // Lenis keeps wheel motion fluid while native touch scrolling remains familiar.
+  if (window.Lenis) {
+    const lenis = new window.Lenis({
+      duration: 1.12,
+      smoothWheel: true,
+      syncTouch: false,
+      wheelMultiplier: 0.9,
+      anchors: { offset: -84 }
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    window.__barghtoLenis = lenis;
+  }
+
+  const progressBar = document.getElementById('scroll-progress');
+  if (progressBar) {
+    gsap.set(progressBar, { scaleX: 0, transformOrigin: 'right center' });
+    ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: function (self) { gsap.set(progressBar, { scaleX: self.progress }); }
+    });
+  }
+
+  // First impression: a calm, cinematic sequence instead of simultaneous motion.
+  const heroContent = document.querySelector('.hero-content');
+  const heroVisual = document.querySelector('.hero-visual');
+  const heroWords = gsap.utils.toArray('.hero h1 .solar-word');
+  const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  if (heroContent) gsap.set(heroContent, { autoAlpha: 1, x: 0, y: 0 });
+  if (heroVisual) gsap.set(heroVisual, { autoAlpha: 1, x: 0, y: 0 });
+
+  heroTimeline
+    .from('.hero .badge', { autoAlpha: 0, y: 16, duration: 0.6 })
+    .fromTo(heroWords,
+      { autoAlpha: 0, y: 34, rotateX: -32, filter: 'blur(9px)' },
+      { autoAlpha: 1, y: 0, rotateX: 0, filter: 'blur(0px)', duration: 0.78, stagger: 0.045 },
+      '-=0.3')
+    .from('.hero-lead', { autoAlpha: 0, y: 20, duration: 0.7 }, '-=0.48')
+    .from('.hero-cta .btn', { autoAlpha: 0, y: 18, duration: 0.58, stagger: 0.09 }, '-=0.42')
+    .from('.hero-metrics span', { autoAlpha: 0, y: 14, duration: 0.5, stagger: 0.07 }, '-=0.34');
+
+  if (heroVisual) {
+    heroTimeline.from(heroVisual, { autoAlpha: 0, x: -54, scale: 0.94, duration: 1.05 }, 0.18);
+  }
+
+  // Each section enters once with direction-aware movement and a restrained stagger.
+  gsap.utils.toArray('.reveal').forEach(function (element) {
+    if (element === heroContent || element === heroVisual) return;
+
+    const isStagger = element.classList.contains('reveal-stagger');
+    const fromX = element.classList.contains('reveal-right') ? 48 :
+      element.classList.contains('reveal-left') ? -48 : 0;
+    const fromScale = element.classList.contains('reveal-zoom') ? 0.94 : 1;
+
+    gsap.set(element, { autoAlpha: 1, x: 0, y: 0, scale: 1 });
+    if (isStagger && element.children.length) {
+      gsap.fromTo(element.children,
+        { autoAlpha: 0, y: 28 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.72,
+          stagger: 0.075,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: element, start: 'top 86%', once: true }
+        });
+    } else {
+      gsap.fromTo(element,
+        { autoAlpha: 0, x: fromX, y: fromX ? 0 : 30, scale: fromScale },
+        {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.82,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: element, start: 'top 87%', once: true }
+        });
+    }
+  });
+
+  // Solar layers move at different speeds, creating depth without heavy 3D rendering.
+  gsap.to('.solar-orb', {
+    yPercent: 22,
+    scale: 1.06,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
+  });
+  gsap.to('.solar-rays', {
+    rotation: 7,
+    yPercent: 10,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.1 }
+  });
+  gsap.to('.solar-horizon', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.3 }
+  });
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); }, { once: true });
 })();
 
 // ------- Radial Burst — انفجار شعاعی متحرک پشت هیرو -------
@@ -420,21 +684,4 @@ if (statNumbers.length && 'IntersectionObserver' in window) {
     btn.appendChild(ripple);
     ripple.addEventListener('animationend', function () { ripple.remove(); });
   });
-})();
-
-// SIDE RAYS ? vanilla WebGL adaptation of supplied ReactBits config
-(function(){
-  const canvas=document.getElementById('side-rays-bg'),hero=document.querySelector('.hero');if(!canvas||!hero)return;
-  const gl=canvas.getContext('webgl',{alpha:true,antialias:false,premultipliedAlpha:true});if(!gl)return;
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const vert='attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}';
-  const frag='precision highp float;uniform float iTime;uniform vec2 iResolution;uniform float iSpeed;uniform vec3 iRayColor1;uniform vec3 iRayColor2;uniform float iIntensity;uniform float iSpread;uniform float iFlipX;uniform float iFlipY;uniform float iTilt;uniform float iSaturation;uniform float iBlend;uniform float iFalloff;uniform float iOpacity;float rayStrength(vec2 raySource,vec2 rayRefDirection,vec2 coord,float seedA,float seedB,float speed){vec2 sourceToCoord=coord-raySource;float cosAngle=dot(normalize(sourceToCoord),rayRefDirection);return clamp((0.45+0.15*sin(cosAngle*seedA+iTime*speed))+(0.3+0.2*cos(-cosAngle*seedB+iTime*speed)),0.0,1.0)*clamp((iResolution.x-length(sourceToCoord))/iResolution.x,0.5,1.0);}void main(){vec2 fragCoord=gl_FragCoord.xy;if(iFlipX>0.5)fragCoord.x=iResolution.x-fragCoord.x;if(iFlipY>0.5)fragCoord.y=iResolution.y-fragCoord.y;vec2 coord=vec2(fragCoord.x,iResolution.y-fragCoord.y);vec2 rayPos=vec2(iResolution.x*1.1,-0.5*iResolution.y);float tiltRad=iTilt*3.14159265/180.0;float cs=cos(tiltRad),sn=sin(tiltRad);vec2 rel=coord-rayPos;vec2 tiltedCoord=vec2(rel.x*cs-rel.y*sn,rel.x*sn+rel.y*cs)+rayPos;float halfSpread=iSpread*0.275;vec2 rayRefDir1=normalize(vec2(cos(0.785398+halfSpread),sin(0.785398+halfSpread)));vec2 rayRefDir2=normalize(vec2(cos(0.785398-halfSpread),sin(0.785398-halfSpread)));vec4 rays1=vec4(iRayColor1,1.0)*rayStrength(rayPos,rayRefDir1,tiltedCoord,36.2214,21.11349,iSpeed);vec4 rays2=vec4(iRayColor2,1.0)*rayStrength(rayPos,rayRefDir2,tiltedCoord,22.3991,18.0234,iSpeed*0.2);vec4 color=rays1*(1.0-iBlend)*0.9+rays2*iBlend*0.9;float distanceToLight=length(fragCoord.xy-vec2(rayPos.x,iResolution.y-rayPos.y))/iResolution.y;float brightness=iIntensity*0.4/pow(max(distanceToLight,0.001),iFalloff);color.rgb*=brightness;float gray=dot(color.rgb,vec3(0.299,0.587,0.114));color.rgb=mix(vec3(gray),color.rgb,iSaturation);color.a=max(color.r,max(color.g,color.b))*iOpacity;gl_FragColor=color;}';
-  function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error('Side Rays shader:',gl.getShaderInfoLog(s));return null}return s}
-  const vs=shader(gl.VERTEX_SHADER,vert),fs=shader(gl.FRAGMENT_SHADER,frag);if(!vs||!fs)return;const program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS)){console.error('Side Rays program:',gl.getProgramInfoLog(program));return}gl.useProgram(program);
-  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
-  const u={};['iTime','iResolution','iSpeed','iRayColor1','iRayColor2','iIntensity','iSpread','iFlipX','iFlipY','iTilt','iSaturation','iBlend','iFalloff','iOpacity'].forEach(n=>u[n]=gl.getUniformLocation(program,n));
-  gl.uniform1f(u.iSpeed,2.5);gl.uniform3f(u.iRayColor1,234/255,179/255,8/255);gl.uniform3f(u.iRayColor2,150/255,200/255,1);gl.uniform1f(u.iIntensity,2);gl.uniform1f(u.iSpread,2);gl.uniform1f(u.iFlipX,0);gl.uniform1f(u.iFlipY,0);gl.uniform1f(u.iTilt,0);gl.uniform1f(u.iSaturation,1.5);gl.uniform1f(u.iBlend,.75);gl.uniform1f(u.iFalloff,1.6);gl.uniform1f(u.iOpacity,1);
-  let dpr=1,w=1,h=1,raf=0,visible=true,start=performance.now();function resize(){const r=hero.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);w=Math.max(1,Math.round(r.width));h=Math.max(1,Math.round(r.height));canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';gl.viewport(0,0,canvas.width,canvas.height);gl.useProgram(program);gl.uniform2f(u.iResolution,canvas.width,canvas.height)}
-  function draw(now){if(!visible)return;gl.useProgram(program);gl.uniform1f(u.iTime,(now-start)*.001);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,3);if(!reduced)raf=requestAnimationFrame(draw)}
-  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible&&!reduced&&!raf)raf=requestAnimationFrame(draw);if(!visible&&raf){cancelAnimationFrame(raf);raf=0}},{threshold:.1});observer.observe(hero);addEventListener('resize',()=>{resize();if(reduced)draw(start)});resize();reduced?draw(start):raf=requestAnimationFrame(draw);
 })();
